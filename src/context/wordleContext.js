@@ -9,6 +9,8 @@ export const WordleProvider = ({ children }) => {
     attempt: 0,
     letterPos: 0,
   })
+  const correctWord = 'RIGHT'
+
   const onSelectLetter = keyVal => {
     if (currentAttempt.letterPos > 4) return
     const newBoard = [...board]
@@ -43,6 +45,7 @@ export const WordleProvider = ({ children }) => {
         onSelectLetter,
         onDelete,
         onEnter,
+        correctWord,
       }}
     >
       {children}
