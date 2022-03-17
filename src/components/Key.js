@@ -2,16 +2,23 @@ import React, { useContext } from 'react'
 import { wordleContext } from '../context/wordleContext'
 
 const Key = ({ keyVal, bigKey }) => {
-  const { board, setBoard, currentAttempt, setCurrentAttempt } =
-    useContext(wordleContext)
+  const {
+    board,
+    setBoard,
+    currentAttempt,
+    setCurrentAttempt,
+    onSelectLetter,
+    onDelete,
+    onEnter,
+  } = useContext(wordleContext)
   const selectLetter = () => {
-    const newBoard = [...board]
-    newBoard[currentAttempt.attempt][currentAttempt.letterPos] = keyVal
-    setBoard(newBoard)
-    setCurrentAttempt({
-      ...currentAttempt,
-      letterPos: currentAttempt.letterPos + 1,
-    })
+    if (keyVal === 'ENTER') {
+      onEnter()
+    } else if (keyVal === 'DELETE') {
+      onDelete()
+    } else {
+      onSelectLetter(keyVal)
+    }
   }
   return (
     <div className='key' id={bigKey && 'big'} onClick={selectLetter}>
